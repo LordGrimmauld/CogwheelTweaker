@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[34,)"
+license="MIT"
+#issueTrackerURL=""
+
+[[mods]]
+    modId="cogwheeltweaker"
+    version="${file.jarVersion}"
+    displayName="Cogwheel Tweaker"
+    #updateJSONURL=""
+    authors="Grimmauld"
+    description='''
+A Mod to make basic create kinetic blocks compatible as content tweaker block'''
+
+[[dependencies.cogwheeltweaker]]
+    modId="forge"
+    mandatory=true
+    versionRange="[34.1.42,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.cogwheeltweaker]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.3,1.17,)"
+    ordering="NONE"
+    side="BOTH"
