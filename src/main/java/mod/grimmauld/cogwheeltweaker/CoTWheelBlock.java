@@ -5,7 +5,6 @@ import com.blamejared.contenttweaker.api.items.IIsCotItem;
 import com.blamejared.contenttweaker.api.resources.*;
 import com.simibubi.create.content.contraptions.relays.elementary.CogWheelBlock;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -59,11 +58,6 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 	@Override
 	public Collection<WriteableResource> getDataPackResources() {
 		return Collections.singleton(new WriteableResourceLootTableItem(getRegistryNameNonNull()));
-	}
-
-	@Override
-	public BlockRenderType getRenderType(BlockState state) {
-		return BlockRenderType.INVISIBLE;
 	}
 
 	@Override

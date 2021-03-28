@@ -1,12 +1,15 @@
 package mod.grimmauld.cogwheeltweaker;
 
+import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
 import com.simibubi.create.content.contraptions.base.SingleRotatingInstance;
+import com.simibubi.create.content.contraptions.relays.elementary.BracketedKineticBlockModel;
 import com.simibubi.create.foundation.render.backend.instancing.InstancedTileRenderRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -31,4 +34,11 @@ public class EventListener {
 		ClientRegistry.bindTileEntityRenderer(ObjectHolders.COTWHEEL_TILE, KineticTileEntityRenderer::new);
 		InstancedTileRenderRegistry.instance.register(ObjectHolders.COTWHEEL_TILE, SingleRotatingInstance::new);
 	}
+
+	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
+	public static void onModelBake(ModelBakeEvent event) {
+		CoTWheelBlock.blocks.forEach(block -> CreateClient.getCustomBlockModels().register(block.delegate, BracketedKineticBlockModel::new));
+	}
+
 }
