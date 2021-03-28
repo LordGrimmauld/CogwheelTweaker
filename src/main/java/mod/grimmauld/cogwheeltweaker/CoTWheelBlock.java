@@ -7,23 +7,25 @@ import com.simibubi.create.content.contraptions.relays.elementary.CogWheelBlock;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.IBlockReader;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
+	public static final Set<CoTWheelBlock> blocks = new HashSet<>();
 	private final IIsCotItem item;
 
 	public CoTWheelBlock(CoTWheelBuilder builder, ResourceLocation location) {
-		super(false, builder.getBlockBuilder().getBlockProperties());
+		super(builder.isLarge(location), builder.getBlockBuilder().getBlockProperties());
 		this.setRegistryName(location);
 		item = new CoTWheelItem(this, builder.getBlockBuilder().getItemProperties());
+		blocks.add(this);
 	}
 
 	@Nonnull
@@ -62,5 +64,10 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 	@Override
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.INVISIBLE;
+	}
+
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		return new CoTWheelTileEntity();
 	}
 }
