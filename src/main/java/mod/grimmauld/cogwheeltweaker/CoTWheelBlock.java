@@ -41,15 +41,13 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 
 		out.add(WriteableResourceImage.noImage(ImageType.BLOCK, location));
 
-		final WriteableResourceTemplate modelTemplate = new WriteableResourceTemplate(ResourceType.ASSETS,
+		out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
 			location, "models", "block").withTemplate(ResourceType.ASSETS,
-			new ResourceLocation(CogwheelTweaker.MODID, "models/block/cogwheel")).setLocationProperty(location);
-		out.add(modelTemplate);
+			new ResourceLocation(CogwheelTweaker.MODID, "models/block/block_cogwheel")).setLocationProperty(location));
 
-		final WriteableResourceTemplate blockstateTemplate = new WriteableResourceTemplate(ResourceType.ASSETS,
+		out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
 			location, "blockstates").withTemplate(ResourceType.ASSETS,
-			new ResourceLocation(CogwheelTweaker.MODID, "blockstates/cogwheel")).setLocationProperty(location);
-		out.add(blockstateTemplate);
+			new ResourceLocation(CogwheelTweaker.MODID, "blockstates/block_cogwheel")).setLocationProperty(location));
 
 		return out;
 	}
