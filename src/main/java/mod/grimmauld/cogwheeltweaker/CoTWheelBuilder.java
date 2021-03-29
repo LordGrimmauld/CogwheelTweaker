@@ -10,8 +10,8 @@ import org.openzen.zencode.java.ZenCodeType;
 
 import java.util.function.Function;
 
-
-@ZenRegister
+@SuppressWarnings("unused")
+@ZenRegister(modDeps = {"contenttweaker"})
 @ZenCodeType.Name("mods.cogweeltweaker.block.cogwheel.CoTWheelBuilder")
 @Document("mods/cogweeltweaker/API/block/cogwheel/CoTWheelBuilder")
 public class CoTWheelBuilder extends BlockTypeBuilder {

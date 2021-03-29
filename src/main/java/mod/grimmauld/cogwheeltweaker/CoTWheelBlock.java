@@ -17,14 +17,13 @@ import java.util.*;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
-	public static final Set<CoTWheelBlock> blocks = new HashSet<>();
 	private final IIsCotItem item;
 
 	public CoTWheelBlock(CoTWheelBuilder builder, ResourceLocation location) {
 		super(builder.isLarge(location), builder.getBlockBuilder().getBlockProperties());
 		this.setRegistryName(location);
 		item = new CoTWheelItem(this, builder.getBlockBuilder().getItemProperties());
-		blocks.add(this);
+		CoTWheelTileEntity.validBlocks.add(this);
 	}
 
 	@Nonnull
@@ -43,7 +42,7 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 
 		out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
 			location, "models", "block").withTemplate(ResourceType.ASSETS,
-			new ResourceLocation(CogwheelTweaker.MODID, "models/block/block_cogwheel")).setLocationProperty(location));
+			new ResourceLocation(CogwheelTweaker.MODID,  isLargeCog() ? "models/block/block_large_cogwheel" : "models/block/block_cogwheel")).setLocationProperty(location));
 
 		out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
 			location, "blockstates").withTemplate(ResourceType.ASSETS,

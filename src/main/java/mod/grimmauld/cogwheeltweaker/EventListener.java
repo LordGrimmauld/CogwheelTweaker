@@ -23,7 +23,7 @@ public class EventListener {
 	public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
 		CogwheelTweaker.LOGGER.info("TEs registering");
 		event.getRegistry().register(TileEntityType.Builder.create(CoTWheelTileEntity::new,
-			CoTWheelBlock.blocks.toArray(new Block[0])).build(null).setRegistryName("cotwheel"));
+			CoTWheelTileEntity.validBlocks.toArray(new Block[0])).build(null).setRegistryName("cotwheel"));
 	}
 
 
@@ -38,7 +38,6 @@ public class EventListener {
 	@SubscribeEvent
 	@OnlyIn(Dist.CLIENT)
 	public static void onModelBake(ModelBakeEvent event) {
-		CoTWheelBlock.blocks.forEach(block -> CreateClient.getCustomBlockModels().register(block.delegate, BracketedKineticBlockModel::new));
+		CoTWheelTileEntity.validBlocks.forEach(block -> CreateClient.getCustomBlockModels().register(block.delegate, BracketedKineticBlockModel::new));
 	}
-
 }

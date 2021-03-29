@@ -22,10 +22,9 @@ public class CoTWheelItem extends CogwheelBlockItem implements IIsCotItem {
 	@Nonnull
 	@Override
 	public Collection<WriteableResource> getResourcePackResources() {
-		final ResourceLocation location = getRegistryNameNonNull();
-		return Collections.singleton(new WriteableResourceTemplate(ResourceType.ASSETS, location,
+		return Collections.singleton(new WriteableResourceTemplate(ResourceType.ASSETS, getRegistryNameNonNull(),
 			"models", "item").withTemplate(ResourceType.ASSETS,
-			new ResourceLocation(ContentTweaker.MOD_ID, "models/item/item_block")).setLocationProperty(location));
+			new ResourceLocation(ContentTweaker.MOD_ID, "models/item/item_block")).setLocationProperty(getRegistryNameNonNull()));
 	}
 
 	@Nonnull
