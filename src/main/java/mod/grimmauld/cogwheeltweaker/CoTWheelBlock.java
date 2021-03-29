@@ -18,11 +18,13 @@ import java.util.*;
 @MethodsReturnNonnullByDefault
 public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 	private final IIsCotItem item;
+	final boolean noTemplate;
 
 	public CoTWheelBlock(CoTWheelBuilder builder, ResourceLocation location) {
 		super(builder.isLarge(location), builder.getBlockBuilder().getBlockProperties());
 		this.setRegistryName(location);
 		item = new CoTWheelItem(this, builder.getBlockBuilder().getItemProperties());
+		noTemplate = builder.hasNoTemplate(location);
 		CoTWheelTileEntity.validBlocks.add(this);
 	}
 
@@ -35,9 +37,11 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 	@Nonnull
 	@Override
 	public Collection<WriteableResource> getResourcePackResources() {
-		final ResourceLocation location = getRegistryNameNonNull();
 		final Collection<WriteableResource> out = new ArrayList<>();
+		if (noTemplate)
+			return out;
 
+		final ResourceLocation location = getRegistryNameNonNull();
 		out.add(WriteableResourceImage.noImage(ImageType.BLOCK, location));
 
 		out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
@@ -54,7 +58,7 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 	@Nonnull
 	@Override
 	public Collection<WriteableResource> getDataPackResources() {
-		return Collections.singleton(new WriteableResourceLootTableItem(getRegistryNameNonNull()));
+		return noTemplate ? Collections.emptyList() : Collections.singleton(new WriteableResourceLootTableItem(getRegistryNameNonNull()));
 	}
 
 	@Override

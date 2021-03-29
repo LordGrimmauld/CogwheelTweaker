@@ -16,10 +16,12 @@ import java.util.function.Function;
 @Document("mods/cogweeltweaker/API/block/cogwheel/CoTWheelBuilder")
 public class CoTWheelBuilder extends BlockTypeBuilder {
 	private Function<ResourceLocation, Boolean> large;
+	private Function<ResourceLocation, Boolean> noTemplate;
 
 	public CoTWheelBuilder(BlockBuilder blockBuilder) {
 		super(blockBuilder);
 		large = rl -> false;
+		noTemplate = rl -> false;
 	}
 
 	@Override
@@ -29,6 +31,10 @@ public class CoTWheelBuilder extends BlockTypeBuilder {
 
 	public boolean isLarge(ResourceLocation name) {
 		return large.apply(name);
+	}
+
+	public boolean hasNoTemplate(ResourceLocation name) {
+		return noTemplate.apply(name);
 	}
 
 	@ZenCodeType.Method
@@ -43,5 +49,9 @@ public class CoTWheelBuilder extends BlockTypeBuilder {
 		return this;
 	}
 
-
+	@ZenCodeType.Method
+	public CoTWheelBuilder noTemplate() {
+		this.noTemplate = rl -> true;
+		return this;
+	}
 }
