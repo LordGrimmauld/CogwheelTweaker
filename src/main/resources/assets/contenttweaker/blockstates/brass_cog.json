@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "contenttweaker:block/brass_cog",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "contenttweaker:block/brass_cog"
+    },
+    "axis=z": {
+      "model": "contenttweaker:block/brass_cog",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "contenttweaker:block/andesite_cog",
+      "z": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "contenttweaker:block/andesite_cog",
+      "x": 90
+    },
+    "axis=z": {
+      "model": "contenttweaker:block/andesite_cog"
+    }
+  }
+}
