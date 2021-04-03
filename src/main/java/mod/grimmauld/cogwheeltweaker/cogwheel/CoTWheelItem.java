@@ -1,4 +1,4 @@
-package mod.grimmauld.cogwheeltweaker;
+package mod.grimmauld.cogwheeltweaker.cogwheel;
 
 import com.blamejared.contenttweaker.ContentTweaker;
 import com.blamejared.contenttweaker.api.items.IIsCotItem;

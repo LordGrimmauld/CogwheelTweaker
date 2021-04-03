@@ -1,5 +1,11 @@
 {
   "type": "minecraft:block",
+  "conditions": [
+    {
+      "type": "forge:item_exists",
+      "item": "contenttweaker:andesite_cog"
+    }
+  ],
   "pools": [
     {
       "rolls": 1,

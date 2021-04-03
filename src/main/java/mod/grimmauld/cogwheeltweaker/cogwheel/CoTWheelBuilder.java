@@ -1,4 +1,4 @@
-package mod.grimmauld.cogwheeltweaker;
+package mod.grimmauld.cogwheeltweaker.cogwheel;
 
 import com.blamejared.contenttweaker.VanillaFactory;
 import com.blamejared.contenttweaker.api.blocks.BlockTypeBuilder;

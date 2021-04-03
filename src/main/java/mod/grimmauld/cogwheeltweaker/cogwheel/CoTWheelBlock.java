@@ -1,10 +1,11 @@
-package mod.grimmauld.cogwheeltweaker;
+package mod.grimmauld.cogwheeltweaker.cogwheel;
 
 import com.blamejared.contenttweaker.api.blocks.IIsCoTBlock;
 import com.blamejared.contenttweaker.api.items.IIsCotItem;
 import com.blamejared.contenttweaker.api.resources.*;
 import com.simibubi.create.content.contraptions.relays.elementary.CogWheelBlock;
 import mcp.MethodsReturnNonnullByDefault;
+import mod.grimmauld.cogwheeltweaker.CogwheelTweaker;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

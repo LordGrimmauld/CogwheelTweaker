@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "mod.grimmauld.cogwheeltweaker.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "hackforge.refmap.json",
+  "mixins": [
+    "LoadLootTableMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
