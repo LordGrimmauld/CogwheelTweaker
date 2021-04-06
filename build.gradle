@@ -102,6 +102,7 @@ dependencies {
     compile fg.deobf("mezz.jei:jei-1.16.4:7.6.1.65")
     implementation fg.deobf("curse.maven:cnt-237065:3163717")
     implementation fg.deobf("curse.maven:create-328085:3260165")
+    implementation fg.deobf("curse.maven:openloader-354339:3060693")
     annotationProcessor 'org.spongepowered:mixin:0.8:processor'
 }
 

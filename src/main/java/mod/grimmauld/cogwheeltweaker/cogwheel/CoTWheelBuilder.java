@@ -8,20 +8,28 @@ import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.util.ResourceLocation;
 import org.openzen.zencode.java.ZenCodeType;
 
-import java.util.function.Function;
+import javax.annotation.Nullable;
 
 @SuppressWarnings("unused")
 @ZenRegister(modDeps = {"contenttweaker"})
 @ZenCodeType.Name("mods.cogweeltweaker.block.cogwheel.CoTWheelBuilder")
 @Document("mods/cogweeltweaker/API/block/cogwheel/CoTWheelBuilder")
 public class CoTWheelBuilder extends BlockTypeBuilder {
-	private Function<ResourceLocation, Boolean> large;
-	private Function<ResourceLocation, Boolean> noTemplate;
+	private boolean large;
+	private boolean noTemplate;
+	@Nullable
+	private String topTexture;
+	@Nullable
+	private String legacyTexture;
+	@Nullable
+	private String legacyModid;
 
 	public CoTWheelBuilder(BlockBuilder blockBuilder) {
 		super(blockBuilder);
-		large = rl -> false;
-		noTemplate = rl -> false;
+	}
+
+	public boolean isLegacyModel() {
+		return topTexture != null && legacyTexture != null ;
 	}
 
 	@Override
@@ -29,29 +37,51 @@ public class CoTWheelBuilder extends BlockTypeBuilder {
 		VanillaFactory.queueBlockForRegistration(new CoTWheelBlock(this, resourceLocation));
 	}
 
-	public boolean isLarge(ResourceLocation name) {
-		return large.apply(name);
+	public boolean isLarge() {
+		return large;
 	}
 
-	public boolean hasNoTemplate(ResourceLocation name) {
-		return noTemplate.apply(name);
+	public boolean hasNoTemplate() {
+		return noTemplate;
+	}
+
+	@Nullable
+	public String getTopTexture() {
+		return topTexture;
+	}
+
+	@Nullable
+	public String getLegacyTexture() {
+		return legacyTexture;
+	}
+
+	@Nullable
+	public String getLegacyModid() {
+		return legacyModid;
 	}
 
 	@ZenCodeType.Method
 	public CoTWheelBuilder withLarge(boolean large) {
-		this.large = rl -> large;
-		return this;
-	}
-
-	@ZenCodeType.Method
-	public CoTWheelBuilder withLarge(Function<ResourceLocation, Boolean> large) {
 		this.large = large;
 		return this;
 	}
 
 	@ZenCodeType.Method
 	public CoTWheelBuilder noTemplate() {
-		this.noTemplate = rl -> true;
+		this.noTemplate = true;
 		return this;
+	}
+
+	@ZenCodeType.Method
+	public CoTWheelBuilder withLegacyTexture(String modid, String legacyTexture, String topTexture) {
+		this.legacyModid = modid;
+		this.topTexture = topTexture;
+		this.legacyTexture = legacyTexture;
+		return this;
+	}
+
+	@ZenCodeType.Method
+	public CoTWheelBuilder withLegacyTexture(String legacyTexture) {
+		return withLegacyTexture("minecraft", legacyTexture, legacyTexture + "_top");
 	}
 }

@@ -8,47 +8,60 @@ import mcp.MethodsReturnNonnullByDefault;
 import mod.grimmauld.cogwheeltweaker.CogwheelTweaker;
 import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.LazyValue;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockReader;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
-	private final IIsCotItem item;
-	final boolean noTemplate;
+	private final LazyValue<IIsCotItem> item;
+	final CoTWheelBuilder builder;
 
 	public CoTWheelBlock(CoTWheelBuilder builder, ResourceLocation location) {
-		super(builder.isLarge(location), builder.getBlockBuilder().getBlockProperties());
+		super(builder.isLarge(), builder.getBlockBuilder().getBlockProperties());
 		this.setRegistryName(location);
-		item = new CoTWheelItem(this, builder.getBlockBuilder().getItemProperties());
-		noTemplate = builder.hasNoTemplate(location);
+		this.item = new LazyValue<>(() -> new CoTWheelItem(this, builder));
+		this.builder = builder;
 		CoTWheelTileEntity.validBlocks.add(this);
 	}
 
 	@Nonnull
 	@Override
 	public IIsCotItem getItem() {
-		return item;
+		return item.getValue();
 	}
 
 	@Nonnull
 	@Override
 	public Collection<WriteableResource> getResourcePackResources() {
 		final Collection<WriteableResource> out = new ArrayList<>();
-		if (noTemplate)
+		if (builder.hasNoTemplate())
 			return out;
 
 		final ResourceLocation location = getRegistryNameNonNull();
 		out.add(WriteableResourceImage.noImage(ImageType.BLOCK, location));
 
-		out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
-			location, "models", "block").withTemplate(ResourceType.ASSETS,
-			new ResourceLocation(CogwheelTweaker.MODID,  isLargeCog() ? "models/block/block_large_cogwheel" : "models/block/block_cogwheel")).setLocationProperty(location));
+		if (builder.isLegacyModel()) {
+			out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
+				location, "models", "block").withTemplate(ResourceType.ASSETS,
+				new ResourceLocation(CogwheelTweaker.MODID, isLargeCog() ? "models/block/block_legacy_large_cogwheel"
+					: "models/block/block_legacy_cogwheel"))
+				.setProperty("NAMESPACE", builder.getLegacyModid())
+				.setProperty("PATH", builder.getLegacyTexture())
+				.setProperty("PATH_TOP", builder.getTopTexture()));
 
+		} else {
+			out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
+				location, "models", "block").withTemplate(ResourceType.ASSETS,
+				new ResourceLocation(CogwheelTweaker.MODID, isLargeCog() ? "models/block/block_large_cogwheel" : "models/block/block_cogwheel")).setLocationProperty(location));
+		}
 		out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
 			location, "blockstates").withTemplate(ResourceType.ASSETS,
 			new ResourceLocation(CogwheelTweaker.MODID, "blockstates/block_cogwheel")).setLocationProperty(location));
@@ -59,7 +72,7 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 	@Nonnull
 	@Override
 	public Collection<WriteableResource> getDataPackResources() {
-		return noTemplate ? Collections.emptyList() : Collections.singleton(new WriteableResourceLootTableItem(getRegistryNameNonNull()));
+		return builder.hasNoTemplate() ? Collections.emptyList() : Collections.singleton(new WriteableResourceLootTableItem(getRegistryNameNonNull()));
 	}
 
 	@Override
