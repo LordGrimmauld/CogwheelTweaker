@@ -4,7 +4,6 @@ import com.blamejared.contenttweaker.VanillaFactory;
 import com.blamejared.contenttweaker.api.blocks.BlockTypeBuilder;
 import com.blamejared.contenttweaker.blocks.BlockBuilder;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
-import com.blamejared.crafttweaker_annotations.annotations.Document;
 import net.minecraft.util.ResourceLocation;
 import org.openzen.zencode.java.ZenCodeType;
 
@@ -13,16 +12,13 @@ import javax.annotation.Nullable;
 @SuppressWarnings("unused")
 @ZenRegister(modDeps = {"contenttweaker"})
 @ZenCodeType.Name("mods.cogweeltweaker.block.cogwheel.CoTWheelBuilder")
-@Document("mods/cogweeltweaker/API/block/cogwheel/CoTWheelBuilder")
 public class CoTWheelBuilder extends BlockTypeBuilder {
 	private boolean large;
 	private boolean noTemplate;
 	@Nullable
-	private String topTexture;
+	private ResourceLocation topTexture;
 	@Nullable
-	private String legacyTexture;
-	@Nullable
-	private String legacyModid;
+	private ResourceLocation legacyTexture;
 
 	public CoTWheelBuilder(BlockBuilder blockBuilder) {
 		super(blockBuilder);
@@ -46,18 +42,13 @@ public class CoTWheelBuilder extends BlockTypeBuilder {
 	}
 
 	@Nullable
-	public String getTopTexture() {
+	public ResourceLocation getTopTexture() {
 		return topTexture;
 	}
 
 	@Nullable
-	public String getLegacyTexture() {
+	public ResourceLocation getLegacyTexture() {
 		return legacyTexture;
-	}
-
-	@Nullable
-	public String getLegacyModid() {
-		return legacyModid;
 	}
 
 	@ZenCodeType.Method
@@ -73,15 +64,14 @@ public class CoTWheelBuilder extends BlockTypeBuilder {
 	}
 
 	@ZenCodeType.Method
-	public CoTWheelBuilder withLegacyTexture(String modid, String legacyTexture, String topTexture) {
-		this.legacyModid = modid;
-		this.topTexture = topTexture;
-		this.legacyTexture = legacyTexture;
+	public CoTWheelBuilder withLegacyTexture(String legacyTexture, String topTexture) {
+		this.topTexture = new ResourceLocation(topTexture);
+		this.legacyTexture = new ResourceLocation(legacyTexture);
 		return this;
 	}
 
 	@ZenCodeType.Method
 	public CoTWheelBuilder withLegacyTexture(String legacyTexture) {
-		return withLegacyTexture("minecraft", legacyTexture, legacyTexture + "_top");
+		return withLegacyTexture(legacyTexture, legacyTexture + "_top");
 	}
 }

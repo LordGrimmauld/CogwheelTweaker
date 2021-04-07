@@ -46,16 +46,18 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 			return out;
 
 		final ResourceLocation location = getRegistryNameNonNull();
-		out.add(WriteableResourceImage.noImage(ImageType.BLOCK, location));
+		if (!builder.isLegacyModel())
+			out.add(WriteableResourceImage.noImage(ImageType.BLOCK, location));
 
 		if (builder.isLegacyModel()) {
 			out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
 				location, "models", "block").withTemplate(ResourceType.ASSETS,
 				new ResourceLocation(CogwheelTweaker.MODID, isLargeCog() ? "models/block/block_legacy_large_cogwheel"
 					: "models/block/block_legacy_cogwheel"))
-				.setProperty("NAMESPACE", builder.getLegacyModid())
-				.setProperty("PATH", builder.getLegacyTexture())
-				.setProperty("PATH_TOP", builder.getTopTexture()));
+				.setProperty("NAMESPACE", builder.getLegacyTexture().getNamespace())
+				.setProperty("PATH", builder.getLegacyTexture().getPath())
+				.setProperty("NAMESPACE_TOP", builder.getTopTexture().getNamespace())
+				.setProperty("PATH_TOP", builder.getTopTexture().getPath()));
 
 		} else {
 			out.add(new WriteableResourceTemplate(ResourceType.ASSETS,
@@ -68,6 +70,8 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 
 		return out;
 	}
+
+
 
 	@Nonnull
 	@Override

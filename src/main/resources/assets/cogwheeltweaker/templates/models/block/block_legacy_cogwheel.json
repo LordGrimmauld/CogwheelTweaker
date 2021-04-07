@@ -4,7 +4,7 @@
     "particle": "$$NAMESPACE$$:block/$$PATH$$",
     "0": "create:block/axis",
     "1": "$$NAMESPACE$$:block/$$PATH$$",
-    "2": "$$NAMESPACE$$:block/$$PATH_TOP$$",
+    "2": "$$NAMESPACE_TOP$$:block/$$PATH_TOP$$",
     "3": "create:block/axis_top"
   },
   "elements": [
