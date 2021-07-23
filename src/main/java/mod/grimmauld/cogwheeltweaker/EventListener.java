@@ -1,10 +1,10 @@
 package mod.grimmauld.cogwheeltweaker;
 
+import com.jozufozu.flywheel.backend.instancing.InstancedRenderRegistry;
 import com.simibubi.create.CreateClient;
 import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
 import com.simibubi.create.content.contraptions.base.SingleRotatingInstance;
 import com.simibubi.create.content.contraptions.relays.elementary.BracketedKineticBlockModel;
-import com.simibubi.create.foundation.render.backend.instancing.InstancedTileRenderRegistry;
 import mod.grimmauld.cogwheeltweaker.cogwheel.CoTWheelTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntityType;
@@ -23,7 +23,7 @@ public class EventListener {
 	@SubscribeEvent
 	public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
 		CogwheelTweaker.LOGGER.info("TEs registering");
-		event.getRegistry().register(TileEntityType.Builder.create(CoTWheelTileEntity::new,
+		event.getRegistry().register(TileEntityType.Builder.of(CoTWheelTileEntity::new,
 			CoTWheelTileEntity.validBlocks.toArray(new Block[0])).build(null).setRegistryName("cotwheel"));
 	}
 
@@ -33,7 +33,7 @@ public class EventListener {
 	public static void clientInit(FMLClientSetupEvent event) {
 		CogwheelTweaker.LOGGER.info("renderers registering");
 		ClientRegistry.bindTileEntityRenderer(ObjectHolders.COTWHEEL_TILE, KineticTileEntityRenderer::new);
-		InstancedTileRenderRegistry.instance.register(ObjectHolders.COTWHEEL_TILE, SingleRotatingInstance::new);
+		InstancedRenderRegistry.getInstance().register(ObjectHolders.COTWHEEL_TILE, SingleRotatingInstance::new);
 	}
 
 	@SubscribeEvent

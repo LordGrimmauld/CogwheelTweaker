@@ -23,8 +23,8 @@ public class LoadLootTableMixin {
 	@Inject(at = @At(value = "INVOKE"), method = {"loadLootTable"}, remap = false, cancellable = true)
 	private static void loadLootTableMixin(Gson gson, ResourceLocation name, JsonElement data, boolean custom, LootTableManager lootTableManager, CallbackInfoReturnable<LootTable> cir) {
 		JsonObject jsonObject = data.getAsJsonObject();
-		if (jsonObject.has("conditions") && !CraftingHelper.processConditions(JSONUtils.getJsonArray(jsonObject, "conditions"))) {
-			cir.setReturnValue(LootTable.EMPTY_LOOT_TABLE);
+		if (jsonObject.has("conditions") && !CraftingHelper.processConditions(JSONUtils.getAsJsonArray(jsonObject, "conditions"))) {
+			cir.setReturnValue(LootTable.EMPTY);
 			CogwheelTweaker.LOGGER.debug("Skipping load of loot table {} as conditions weren't met", name);
 		}
 	}

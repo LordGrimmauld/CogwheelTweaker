@@ -35,7 +35,7 @@ public class CoTWheelBlock extends CogWheelBlock implements IIsCoTBlock {
 	@Nonnull
 	@Override
 	public IIsCotItem getItem() {
-		return item.getValue();
+		return item.get();
 	}
 
 	@Nonnull
