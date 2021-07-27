@@ -3,6 +3,7 @@ package mod.grimmauld.cogwheeltweaker.cogwheel;
 import com.blamejared.contenttweaker.VanillaFactory;
 import com.blamejared.contenttweaker.api.blocks.BlockTypeBuilder;
 import com.blamejared.contenttweaker.blocks.BlockBuilder;
+import com.blamejared.contenttweaker.blocks.render.BlockRenderType;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import net.minecraft.util.ResourceLocation;
 import org.openzen.zencode.java.ZenCodeType;
@@ -25,12 +26,12 @@ public class CoTWheelBuilder extends BlockTypeBuilder {
 	}
 
 	public boolean isLegacyModel() {
-		return topTexture != null && legacyTexture != null ;
+		return topTexture != null && legacyTexture != null;
 	}
 
 	@Override
 	public void build(ResourceLocation resourceLocation) {
-		VanillaFactory.queueBlockForRegistration(new CoTWheelBlock(this, resourceLocation));
+		VanillaFactory.queueBlockForRegistration(new CoTWheelBlock(this, resourceLocation), BlockRenderType.CUTOUT);
 	}
 
 	public boolean isLarge() {

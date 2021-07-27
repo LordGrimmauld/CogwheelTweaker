@@ -2,7 +2,7 @@
   "required": true,
   "package": "mod.grimmauld.cogwheeltweaker.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "hackforge.refmap.json",
+  "refmap": "cogwheeltweaker.refmap.json",
   "mixins": [
     "LoadLootTableMixin"
   ],
