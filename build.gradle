@@ -105,8 +105,8 @@ dependencies {
     compile fg.deobf("com.blamejared.crafttweaker:CraftTweaker-1.16.5:7.1.0.357")
     compile fg.deobf("mezz.jei:jei-1.16.4:7.6.1.65")
     implementation fg.deobf("curse.maven:cnt-237065:3326266")
-    implementation fg.deobf("curse.maven:create-328085:3386319")
-    implementation fg.deobf("curse.maven:flywheel-486392:3384004")
+    implementation fg.deobf("curse.maven:create-328085:3406857")
+    implementation fg.deobf("curse.maven:flywheel-486392:3406855")
     implementation fg.deobf("curse.maven:openloader-354339:3060693")
     annotationProcessor 'org.spongepowered:mixin:0.8:processor'
 }
